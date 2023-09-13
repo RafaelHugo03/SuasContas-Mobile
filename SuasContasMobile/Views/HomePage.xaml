@@ -5,7 +5,7 @@
              Title="Home">
     <VerticalStackLayout>
         <Label 
-            Text="Rafalovin!"
+            Text="Home"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
