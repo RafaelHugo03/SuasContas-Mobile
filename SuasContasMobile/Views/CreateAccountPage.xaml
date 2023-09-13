@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SuasContasMobile.ViewModels"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             x:Class="SuasContasMobile.Views.CreateAccountPage"
+             x:DataType="vm:CreateAccountViewModel"
+             Title="Cadastro"
+             BackgroundColor="#181A20">
+    <Grid RowDefinitions="*,*">
+        <Image HeightRequest="200" Source="gastos.png"/>
+        <Border Grid.Row="1">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20,20,0,0"/>
+            </Border.StrokeShape>
+
+            <ScrollView>
+                <VerticalStackLayout
+                 Padding="20"
+                 Spacing="10"
+                 VerticalOptions="Center">
+                <input:FormView>
+                    <material:TextField
+                        Text="{Binding Name}"
+                        Title="Name"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                    Glyph={x:Static m:MaterialRegular.Person}}">
+                            <validation:RequiredValidation Message="Nome é obrigatório" />
+                        </material:TextField>       
+                </input:FormView>
+                <input:FormView>
+                    <material:TextField
+                        Text="{Binding Email}"
+                        Title="E-mail"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                                Glyph={x:Static m:MaterialRegular.Email}}">
+                            <validation:RequiredValidation Message="E-mail é obrigatório" />
+                            <validation:RegexValidation Message="Endereço de e-mail inválido" Pattern="{x:Static input:AdvancedEntry.REGEX_EMAIL}" />
+                        </material:TextField>
+                </input:FormView>
+                <input:FormView>
+                    <material:TextField
+                        Text="{Binding Password}"
+                        Title="Password"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                                Glyph={x:Static m:MaterialRegular.Key}}"
+                        IsPassword="True">
+                        <validation:RequiredValidation Message="Senha é obrigatório" />
+                    </material:TextField>
+                </input:FormView>
+                <input:FormView>
+                        <material:TextField
+                        Text="{Binding PasswordConfirm}"
+                        Title="Password Confirm"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                               Glyph={x:Static m:MaterialRegular.Key}}"
+                        IsPassword="True">
+                            <validation:RequiredValidation Message="Senha é obrigatório" />
+                    </material:TextField>
+                </input:FormView>
+
+                <Button
+                    Command="{Binding CreateAccountCommand}"
+                    Text="Salvar"
+                    BackgroundColor="#181A20"
+                    TextColor="White"
+                    FontSize="Medium"
+                    CornerRadius="10">
+                </Button>
+            </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+    </Grid>
+</ContentPage>

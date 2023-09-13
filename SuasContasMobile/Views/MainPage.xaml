@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:SuasContasMobile.ViewModels"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+			 x:Class="SuasContasMobile.Views.MainPage"
+			 x:DataType="vm:MainViewModel"
+             BackgroundColor="#181A20"
+             Title="Bem-vindo">
+
+    <Grid RowDefinitions="*,*">
+        <Image HeightRequest="200" Source="gastos.png"/>
+
+        <Border Grid.Row="1">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20,20,0,0"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout
+                Padding="20"
+                Spacing="20"
+                VerticalOptions="CenterAndExpand">
+
+                <input:FormView>
+                    <material:TextField
+                        Title="E-mail"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                               Glyph={x:Static m:MaterialRegular.Email}}"
+                        Text="{Binding Email}">
+                        <validation:RequiredValidation Message="E-mail é obrigatório" />
+                        <validation:RegexValidation Message="Endereço de e-mail inválido" Pattern="{x:Static input:AdvancedEntry.REGEX_EMAIL}" />
+                    </material:TextField>
+                </input:FormView>
+                <input:FormView>
+                    <material:TextField
+                        Title="Password"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                               Glyph={x:Static m:MaterialRegular.Key}}"
+                        IsPassword="True"
+                        Text="{Binding Password}">
+                        <validation:RequiredValidation Message="Senha é obrigatório" />
+                    </material:TextField>
+                </input:FormView>
+                <Button
+                    Text="Login"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="#181A20"
+                    TextColor="White"
+                    FontSize="Medium"
+                    CornerRadius="10">
+                </Button>
+                <Button
+                    Text="Cadastrar"
+                    Command="{Binding CreateAccountCommand}"
+                    BackgroundColor="#181A20"
+                    TextColor="White"
+                    FontSize="Medium"
+                    CornerRadius="10">
+                </Button>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>
